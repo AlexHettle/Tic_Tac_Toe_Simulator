@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+//creates an arry of length 9 that 
+//holds the numbers 1-9
 int * create_contents(void){
     static int contents[9];
     for(int i=0;i<9;i++){
@@ -8,6 +10,9 @@ int * create_contents(void){
     }
     return contents;
 }
+//Prints a previously created array in a way
+//that matches what a standard tic tac toe
+//board looks like
 void print_board(int row,int contents[9]){
     if(row==0){
         printf("*************\n");
@@ -27,6 +32,8 @@ void print_board(int row,int contents[9]){
         print_board(row+3,contents);
     }
 }
+//Checks if there is a winning combination
+//on the board
 int check_for_victory(int c[9]){
     if((c[0]==c[1])&&(c[1]==c[2])){
         return 1;
@@ -47,6 +54,8 @@ int check_for_victory(int c[9]){
     }
     return 0;
 }
+//Checks if all 9 spots on the board have
+//an X or an O in it
 int is_board_full(int contents[9]){
     int counter=0;
     for(int i=0;i<9;i++){
@@ -59,6 +68,7 @@ int is_board_full(int contents[9]){
     }
     return 0;
 }
+//Makes players move
 void players_move(char p1, int contents[9]){
     int choice = rand()%9;
     if((contents[choice]=='X')||(contents[choice]=='O')){
@@ -67,6 +77,8 @@ void players_move(char p1, int contents[9]){
         contents[choice]=p1;
     }
 }
+//has the computer play against itself
+//plays the game until there is a victory or a draw
 void play_game(char p1,char p2,int contents[9],clock_t start_time){
     for(int i=0;i<25;i++){printf("\n");}
     players_move(p1,contents);
@@ -81,6 +93,7 @@ void play_game(char p1,char p2,int contents[9],clock_t start_time){
         play_game(p2,p1,contents,start_time);
     }
 }
+//sets up game and then begins and calls play_game
 int main(void){
     srand(time(NULL));
     int *p;
